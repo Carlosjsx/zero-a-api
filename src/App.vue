@@ -68,6 +68,9 @@ const limparCampos = () => {
       <button type="submit" class="btn btn__solid-add">Adicionar</button>
       </div>
     </form>
+
+    <p class="nenhum__contato" v-if="usuarios.length<1">Nenhum contato cadastrado</p>
+
     <ul class="cards__usuarios">
       <li v-for="usuario in usuarios" :key="usuario.id" class="card__usuario">
         <p><strong>Nome: </strong>{{ usuario.nome }}</p>
@@ -144,6 +147,12 @@ html {
 .form__field-only{
   display:flex;
   align-items:center;
+}
+
+.nenhum__contato{
+padding:2rem;
+text-align:center;
+color:red;
 }
 
 .cards__usuarios{
