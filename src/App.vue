@@ -50,20 +50,34 @@ const limparCampos = () => {
 </script>
 
 <template>
-  <section class="container">
-    <h1>Bem-vindo!</h1>
+  <section id="content">
+  <div class="container">
+    <div class="logo">
+      <div class="logo__image">
+        <img width="48" height="48" src="https://img.icons8.com/color/48/call-list.png" alt="call-list"/>
+      </div>
+      <div>
+        <h1>Bem-vindo!</h1>
+        <p class="logo__lema">Lista telefônica online</p>
+      </div>
+    </div>
 
     <form @submit.prevent="adicionarNovo">
-      <input type="text" placeholder="Nome completo" v-model="formulario.nome" />
-      <button type="submit">Adicionar</button>
+      <div class="form__field-only">
+        <input type="text" placeholder="Nome completo" v-model="formulario.nome" class="field"/>
+      <button type="submit" class="btn btn__solid-add">Adicionar</button>
+      </div>
     </form>
-    <ul>
+    <ul class="cards__usuarios">
       <li v-for="usuario in usuarios" :key="usuario.id" class="card__usuario">
         <p><strong>Nome: </strong>{{ usuario.nome }}</p>
-        <button @click="deletarUsuario(usuario.id)">X</button>
+        <button @click="deletarUsuario(usuario.id)" class="btn__delete">
+          <img width="24" height="24" src="https://img.icons8.com/material-outlined/FF6347/24/filled-trash.png" alt="filled-trash"/>
+        </button>
       </li>
     </ul>
-  </section>
+  </div>
+</section>
 </template>
 
 <style>
@@ -74,23 +88,100 @@ const limparCampos = () => {
   box-sizing: border-box;
 }
 
+:root{
+  --ms:.2rem;
+  --cor-desfoque:#00000060;
+
+
+  --mini:.6rem;
+  --base:.8rem;
+  --meddium:2rem;
+  --larger:3rem;
+  --larger-x:4.5rem;
+
+  --box-shadow: 0 0 5px #00000050;
+
+  --primary:blue;
+  --light:#FFFFFF;
+  --fosco:#f2f2f2;
+  --dark:#000000;
+}
+
 html {
   font-family: 'Roboto', sans-serif;
 }
 
+#content{
+  background:var(--fosco);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding: var(--base);
+}
+
 .container {
+  background-color: var(--light);
   padding: 1rem 10%;
+  max-width:768px;
+  width:100%;
+  padding:1rem;
+  margin:0 auto;
+  min-height:90vh;
+}
+
+.logo{
+  display:flex;
+  gap:var(--ms);
+  align-items:center;
+  margin: 0 0 var(--meddium);
+}
+
+.logo__lema{
+  color:var(--cor-desfoque);
+  font-size:(--font-ms);
+}
+
+.form__field-only{
+  display:flex;
+  align-items:center;
+}
+
+.cards__usuarios{
+  padding:1rem 0;
+  height:400px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
 }
 
 .card__usuario {
   display: flex;
+  align-items:center;
   justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #ccc;
-  max-width: 400px;
-}
+  padding: var(--base);
+  box-shadow: var(--box-shadow);
+ }
+
+
+ .btn__delete{
+  border:0;
+  background:transparent;
+ }
 
 button {
   cursor: pointer;
+}
+.field{
+  padding:var(--base);
+  width:100%;
+}
+
+.btn__solid-add{
+  border:2px solid var(--primary);
+  border-radius:0 var(--base) var(--base) 0;
+  background:var(--primary);
+  color:var(--light);
+  padding:var(--base);
 }
 </style>
