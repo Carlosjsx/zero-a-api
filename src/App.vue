@@ -24,6 +24,7 @@ onMounted(async () => {
   const response = await axios.get(url)
   usuarios.value = response.data
 })
+//
 
 async function deletarUsuario(id: number) {
   if (confirm('Excluir?')) {
